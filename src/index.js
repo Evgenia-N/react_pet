@@ -43,19 +43,17 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = 'Выиграл ' + winner;
-      // this.setState({
-      //   isVictorious: true,
-      // })
     } else {
       status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
     return (
+      <>
+      {calculateWinner(this.state.squares)
+        ? <img className = "game-victory" src={victoryPic} alt='animated pic with people celebrating victory' />
+        : ""
+      }
       <div className="game-board_container">
-        {this.state.isVictorious
-          ? <img className = "game-victory" src={victoryPic} alt='animated pic with people celebrating victory' />
-          : ""
-        }
         <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
@@ -73,6 +71,7 @@ class Board extends React.Component {
           {this.renderSquare(8)}
         </div>
       </div>
+      </>
     );
   }
 }
