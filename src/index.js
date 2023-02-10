@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import victoryPic from './images/1.gif';
 
 function Square(props) {
   return (
@@ -16,6 +17,7 @@ class Board extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       xIsNext: true,
+      isVictorious: false,
     }
   }
 
@@ -41,12 +43,19 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = 'Выиграл ' + winner;
+      // this.setState({
+      //   isVictorious: true,
+      // })
     } else {
       status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
     return (
       <div className="game-board_container">
+        {this.state.isVictorious
+          ? <img className = "game-victory" src={victoryPic} alt='animated pic with people celebrating victory' />
+          : ""
+        }
         <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}

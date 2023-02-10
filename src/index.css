@@ -16,7 +16,7 @@ ol, ul {
 }
 
 .status {
-  margin-bottom: 10px;
+  margin: 10px auto;
 }
 
 .square {
@@ -63,4 +63,9 @@ ol, ul {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.game-victory {
+  margin: auto;
+  width: 100px;
 }
