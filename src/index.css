@@ -67,5 +67,8 @@ ol, ul {
 
 .game-victory {
   margin: auto;
-  width: 100px;
+  width: 250px;
+  position: absolute;
+  top: 50px;
+  left: calc((100vw - 250px) / 2);
 }
