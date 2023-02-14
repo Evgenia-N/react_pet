@@ -48,7 +48,15 @@ ol, ul {
 }
 
 .game-info {
-  margin-left: 20px;
+  width: 100px;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 5vh;
+  left: 40vw;
 }
 
 .game-board {
@@ -66,9 +74,16 @@ ol, ul {
 }
 
 .game-victory {
-  margin: auto;
-  width: 250px;
-  position: absolute;
-  top: 50px;
-  left: calc((100vw - 250px) / 2);
+  margin-bottom: 50px;
+  width: 20vw;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    left: 30vw;
+  }
+
+  .game-victory {
+    width: 40vw;
+  }
 }
