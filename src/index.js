@@ -81,11 +81,20 @@ class Game extends React.Component {
       status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
+    const handleButtonClick = () => {
+      this.setState({
+        history: history.concat([{
+          squares: Array(9).fill(null),
+        }]),
+        xIsNext: true,
+      })
+    }
+
     return (
       <div className="game">
         {calculateWinner(current.squares)
           ? <div className="game-container">
-              <img class="game-victory" src="/static/media/1.c87058dcda11e09569b4.gif" alt="animated pic with people celebrating victory" />
+              <img className="game-victory" src="/static/media/1.c87058dcda11e09569b4.gif" alt="animated pic with people celebrating victory" />
             </div>
           : ""
         }
@@ -94,6 +103,7 @@ class Game extends React.Component {
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
+        <button onClick={handleButtonClick} className="game-board-clear-button">Очистить</button>
         </div>
         <div className="game-info">
           <div>{status}</div>

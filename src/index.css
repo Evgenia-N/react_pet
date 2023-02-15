@@ -73,6 +73,14 @@ ol, ul {
   align-items: center;
 }
 
+.game-board-clear-button {
+  margin-top: 10px;
+  width: 99px;
+  height: 33px;
+  border-radius: 5px;
+  border: none;
+}
+
 .game-victory {
   margin-bottom: 50px;
   width: 20vw;
