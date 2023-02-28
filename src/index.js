@@ -50,12 +50,13 @@ class Game extends React.Component {
       history: [{
         squares: Array(9).fill(null),
       }],
+      stepNumber: 0,
       xIsNext: true,
     };
   }
 
   handleClick(i) {
-    const history = this.state.history;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -66,13 +67,21 @@ class Game extends React.Component {
       history: history.concat([{
         squares: squares,
       }]),
+      stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+    });
+  }
+
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: (step % 2) === 0,
     });
   }
 
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
@@ -89,15 +98,19 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Выиграл ' + winner;
+    } else if (history.length > 8) {
+      status = 'Ничья!'
     } else {
       status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
     const handleButtonClick = () => {
+      const history = [];
       this.setState({
         history: history.concat([{
           squares: Array(9).fill(null),
         }]),
+        stepNumber: 0,
         xIsNext: true,
       })
     }
@@ -106,16 +119,16 @@ class Game extends React.Component {
       <div className="game">
         {calculateWinner(current.squares)
           ? <div className="game-container">
-              <img className="game-victory" src="/static/media/1.c87058dcda11e09569b4.gif" alt="animated pic with people celebrating victory" />
+              <img className="game-victory" src={victoryPic} alt="animated pic with people celebrating victory" />
             </div>
           : ""
         }
         <div className="game-board">
-        <Board
+          <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
-        <button onClick={handleButtonClick} className="game-board-clear-button">Очистить</button>
+          <button onClick={handleButtonClick} className="game-board-clear-button">Очистить</button>
         </div>
         <div className="game-info">
           <div>{status}</div>
