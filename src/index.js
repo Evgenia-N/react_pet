@@ -5,6 +5,7 @@ import victoryPic from './images/1.gif';
 
 function Square(props) {
   return (
+    // Когда кто-то выигрывает, подсветите три клетки, которые привели к победе.
     <button className="square" onClick = {props.onClick}>
       {props.value}
     </button>
@@ -12,15 +13,17 @@ function Square(props) {
 }
 
 class Board extends React.Component {
-
   renderSquare(i) {
-    return <Square value={this.props.squares[i]}
-    onClick={() => this.props.onClick(i)}/>
+    return <Square 
+      value={this.props.squares[i]}
+      onClick={() => this.props.onClick(i)}
+    />
   }
 
   render() {
     return (
       <>
+      {/* Перепишите Board, используя вложенные циклы для создания клеток, вместо их жёсткого кодирования. */}
       <div className="game-board_container">
         <div className="board-row">
           {this.renderSquare(0)}
